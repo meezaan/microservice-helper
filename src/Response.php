@@ -2,6 +2,8 @@
 
 namespace Meezaan\MicroServiceHelper;
 
+use Meezaan\MicroServiceHelper\HttpCodes;
+
 /**
  * Class Response
  * @package Meezaan\MicroServiceHelper\Response
@@ -15,12 +17,12 @@ class Response
      * @param  [type] $status [description]
      * @return [type]         [description]
      */
-    public static function build($data, $code, $status)
+    public static function build($data, $code)
     {
         return
             [
                 'code' => $code,
-                'status' => $status,
+                'status' => HttpCodes::getCode($code),
                 'data' => $data
             ];
     }
