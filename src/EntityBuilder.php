@@ -4,21 +4,49 @@ namespace Meezaan\MicroServiceHelper;
 
 class EntityBuilder
 {
+    /**
+     * [protected description]
+     * @var [type]
+     */
     protected $entity;
+
+    /**
+     * [protected description]
+     * @var [type]
+     */
     protected $entityManager;
+
+    /**
+     * [protected description]
+     * @var [type]
+     */
     protected $validationErrors = [];
 
+    /**
+     * [__construct description]
+     * @param [type] $entityManager [description]
+     * @param [type] $entity        [description]
+     */
     public function __construct($entityManager, $entity)
     {
         $this->entityManager = $entityManager;
         $this->entity = $entity;
     }
 
+    /**
+     * [setEntity description]
+     * @param [type] $entity [description]
+     */
     public function setEntity($entity)
     {
         $this->entity = $entity;
     }
 
+    /**
+     * [buildFromPost description]
+     * @param  [type] $post [description]
+     * @return [type]       [description]
+     */
     public function buildFromPost($post)
     {
         foreach ($post as $key => $val) {
@@ -27,12 +55,21 @@ class EntityBuilder
         }
     }
 
-
+    /**
+     * [isValid description]
+     * @param  array   $post [description]
+     * @return boolean       [description]
+     */
     public function isValid(array $post)
     {
         return $this->validate($post);
     }
 
+    /**
+     * [validate description]
+     * @param  array  $post [description]
+     * @return [type]       [description]
+     */
     private function validate(array $post)
     {
         $this->validationErrors = [];
@@ -48,7 +85,7 @@ class EntityBuilder
         }
 
         return true;
-    
+
     }
 
     public function getValidationErrors()
