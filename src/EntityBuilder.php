@@ -47,7 +47,7 @@ class EntityBuilder
      * @param  [type] $post [description]
      * @return [type]       [description]
      */
-    public function buildFromPost($post)
+    public function buildFromPost(array $post)
     {
         foreach ($post as $key => $val) {
             $method = ucfirst($key);
@@ -60,7 +60,7 @@ class EntityBuilder
      * @param  array   $post [description]
      * @return boolean       [description]
      */
-    public function isValid(array $post)
+    public function isValid(array $post): bool
     {
         return $this->validate($post);
     }
@@ -70,7 +70,7 @@ class EntityBuilder
      * @param  array  $post [description]
      * @return [type]       [description]
      */
-    private function validate(array $post)
+    private function validate(array $post): bool
     {
         $this->validationErrors = [];
         foreach ($post as $key => $val) {
@@ -88,12 +88,12 @@ class EntityBuilder
 
     }
 
-    public function getValidationErrors()
+    public function getValidationErrors(): array
     {
         return $this->validationErrors;
     }
 
-    public function save($post, $return = true)
+    public function save(array $post): int
     {
         $this->buildFromPost($post);
 
@@ -101,13 +101,13 @@ class EntityBuilder
 
         $this->entityManager->flush();
 
-        if ($return) {
-            return $this->entity->getId();
-        }
+        return $this->entity->getId();
+        
     }
 
-    public function get($id) {
-        $result = false;
+    public function get(int $id): ?array
+    {
+        $result = null;
         foreach ($this->entityManager->getClassMetadata(get_class($this->entity))->getColumnNames() as $key) {
             if (!is_int($key)) {
                 $method = ucfirst($key);
