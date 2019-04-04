@@ -93,7 +93,7 @@ class EntityBuilder
         return $this->validationErrors;
     }
 
-    public function save(array $post): int
+    public function save(array $post)
     {
         $this->buildFromPost($post);
 
