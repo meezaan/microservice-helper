@@ -105,7 +105,7 @@ class EntityBuilder
         
     }
 
-    public function get(int $id): ?array
+    public function get($id): ?array
     {
         $result = null;
         foreach ($this->entityManager->getClassMetadata(get_class($this->entity))->getColumnNames() as $key) {
